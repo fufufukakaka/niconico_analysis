@@ -1,0 +1,88 @@
+---
+title: "beysian_network_niconico_yukkuri"
+author: "Yusuke Fukasawa"
+date: "2015年10月15日"
+output: html_document
+---
+
+ニコニコ動画のゆっくりに関連するタグで検索した動画についてベイジアンネットワークを用いた分析をしたよ
+
+```{r,cache=TRUE}
+# 素晴らしいツールをもらい受ける
+library("niconico")
+
+# ゆっくりに関連したタグで検索をかける
+
+s1<-getSearch(query = "ゆっくり実況プレイ", size = 100, type = "tag")
+s2<-getSearch(query = "ゆっくり実況", size = 100, type = "tag")
+s3<-getSearch(query = "ゆっくり", size = 100, type = "tag")
+s4<-getSearch(query = "ゆっくり実況プレイpart1リンク", size = 100, type = "tag")
+s5<-getSearch(query = "ゆっくりTRPG", size = 100, type = "tag")
+s6<-getSearch(query = "ゆっくり解説", size = 100, type = "tag")
+s7<-getSearch(query = "ゆっくりロボット物実況", size = 100, type = "tag")
+s8<-getSearch(query = "ゆっくり怪談", size = 100, type = "tag")
+s9<-getSearch(query = "ゆっくりボイス", size = 100, type = "tag")
+s10<-getSearch(query = "ゆっくり実況プレイ最終回リンク", size = 100, type = "tag")
+s11<-getSearch(query = "ゆっくり劇場", size = 100, type = "tag")
+s12<-getSearch(query = "ゆっくりしていってね！！！", size = 100, type = "tag")
+s13<-getSearch(query = "ゆっくり朗読", size = 100, type = "tag")
+s14<-getSearch(query = "ゆっくり評価されるべき", size = 100, type = "tag")
+s15<-getSearch(query = "多人数ゆっくり実況プレイ", size = 100, type = "tag")
+s16<-getSearch(query = "ゆっくり車載", size = 100, type = "tag")
+s17<-getSearch(query = "ゆっくりMinecraft", size = 100, type = "tag")
+s18<-getSearch(query = "ゆっくりスプラトゥーン", size = 100, type = "tag")
+s19<-getSearch(query = "ゆっくりショート怪談リンク", size = 100, type = "tag")
+s20<-getSearch(query = "ゆっくり解説Part1リンク", size = 100, type = "tag")
+s21<-getSearch(query = "艦娘ゆっくり実況プレイ", size = 100, type = "tag")
+s22<-getSearch(query = "ゆっくり旅行", size = 100, type = "tag")
+s23<-getSearch(query = "ゆっくりTRPG第一話リンク", size = 100, type = "tag")
+s24<-getSearch(query = "ゆっくり実況プレイ単発リンク", size = 100, type = "tag")
+s25<-getSearch(query = "ホラーゆっくり実況", size = 100, type = "tag")
+s26<-getSearch(query = "本気で歌うゆっくりシリーズ", size = 100, type = "tag")
+s27<-getSearch(query = "ホラーゆっくり実況", size = 100, type = "tag")
+s28<-getSearch(query = "ゆっくり生活", size = 100, type = "tag")
+```
+
+ここからしばらくrbindに気付かず時間を費やす。しかも結局力技。
+
+```{r}
+alldata<-rbind(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28)
+
+# rmsidで重複がないか調べる
+sum(duplicated( data.frame(alldata$cmsid) ))
+
+# なかったので、そのまま進める。ベイジアンネットワークによる分析。
+library(deal)
+
+# 分析にカテゴリがないとダメなことに気付かず30分程費やす。あと日付処理でもミスを連発したんご
+
+alldata$start_time<-as.character(alldata$start_time)
+alldata$start_time<-as.POSIXlt(alldata$start_time)
+
+# 今回は2012/01/01より前か後かで分類してみる
+t<-subset(alldata,start_time > as.POSIXlt("2012/01/01"))
+t1<-subset(alldata,start_time < as.POSIXlt("2012/01/01"))
+t$time<-0
+t1$time<-1
+alldata<-rbind(t,t1)
+data<-data.frame(cbind(alldata$time,alldata$comment_counter,alldata$length_seconds,alldata$mylist_counter,alldata$view_counter))
+names(data)<-c("time","comment","length","mylist","view")
+
+# cbindでつなげる方法しかわからないのでいつもlist型になって二度手間になってしまうのだ
+
+data$time<-as.numeric(data$time)
+data$time<-as.factor(data$time)
+data$comment<-as.numeric(data$comment)
+data$length<-as.numeric(data$length)
+data$view<-as.numeric(data$view)
+data$mylist<-as.numeric(data$mylist)
+ht.nw <- network(data)
+plot(ht.nw)
+
+# ようやくネットワーク図とご対面です
+
+ht.prior <- jointprior(ht.nw)
+ht.nw <- learn(ht.nw, data, ht.prior)$nw
+ht.search <- autosearch(ht.nw, data, ht.prior, trace = TRUE)
+
+```
