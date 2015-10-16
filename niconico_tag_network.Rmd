@@ -1,0 +1,65 @@
+---
+title: "yukkyuri_tag_network"
+author: "Yusuke Fukasawa"
+date: "2015年10月16日"
+output: html_document
+---
+
+ゆっくり、で連関性のあるタグを収集し、タグのネットワークを作るのだ
+
+```{r,cache=TRUE}
+require(niconico)
+
+# ゆっくりに関連したタグで検索をかける
+
+s1<-getSearch(query = "ゆっくり実況プレイ", size = 100, type = "tag")
+s2<-getSearch(query = "ゆっくり実況", size = 100, type = "tag")
+s3<-getSearch(query = "ゆっくり", size = 100, type = "tag")
+s4<-getSearch(query = "ゆっくり実況プレイpart1リンク", size = 100, type = "tag")
+s5<-getSearch(query = "ゆっくりTRPG", size = 100, type = "tag")
+s6<-getSearch(query = "ゆっくり解説", size = 100, type = "tag")
+s7<-getSearch(query = "ゆっくりロボット物実況", size = 100, type = "tag")
+s8<-getSearch(query = "ゆっくり怪談", size = 100, type = "tag")
+s9<-getSearch(query = "ゆっくりボイス", size = 100, type = "tag")
+s10<-getSearch(query = "ゆっくり実況プレイ最終回リンク", size = 100, type = "tag")
+s11<-getSearch(query = "ゆっくり劇場", size = 100, type = "tag")
+s12<-getSearch(query = "ゆっくりしていってね！！！", size = 100, type = "tag")
+s13<-getSearch(query = "ゆっくり朗読", size = 100, type = "tag")
+s14<-getSearch(query = "ゆっくり評価されるべき", size = 100, type = "tag")
+s15<-getSearch(query = "多人数ゆっくり実況プレイ", size = 100, type = "tag")
+s16<-getSearch(query = "ゆっくり車載", size = 100, type = "tag")
+s17<-getSearch(query = "ゆっくりMinecraft", size = 100, type = "tag")
+s18<-getSearch(query = "ゆっくりスプラトゥーン", size = 100, type = "tag")
+s19<-getSearch(query = "ゆっくりショート怪談リンク", size = 100, type = "tag")
+s20<-getSearch(query = "ゆっくり解説Part1リンク", size = 100, type = "tag")
+s21<-getSearch(query = "艦娘ゆっくり実況プレイ", size = 100, type = "tag")
+s22<-getSearch(query = "ゆっくり旅行", size = 100, type = "tag")
+s23<-getSearch(query = "ゆっくりTRPG第一話リンク", size = 100, type = "tag")
+s24<-getSearch(query = "ゆっくり実況プレイ単発リンク", size = 100, type = "tag")
+s25<-getSearch(query = "ホラーゆっくり実況", size = 100, type = "tag")
+s26<-getSearch(query = "本気で歌うゆっくりシリーズ", size = 100, type = "tag")
+s27<-getSearch(query = "ホラーゆっくり実況", size = 100, type = "tag")
+s28<-getSearch(query = "ゆっくり生活", size = 100, type = "tag")
+int<-rbind(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28)
+```
+```{r}
+# いらないものはすてる
+int<-int[,c(-1,-4,-5,-10,-11)]
+
+# このままだとlistオブジェクトでどうにもならないので、列ごとに適したものに変換する
+int$start_time<-as.character(int$start_time)
+int$start_time<-as.POSIXlt(int$start_time)
+int$comment_counter<-as.numeric(int$comment_counter)
+int$length_seconds<-as.numeric(int$length_seconds)
+int$view_counter<-as.numeric(int$view_counter)
+int$mylist_coutner<-as.numeric(int$mylist_counter)
+int$tags<-as.character(int$tags)
+
+# こっからわからんで
+taghead<-int$tags
+taghead<-data.frame(taghead)
+taghead$taghead<-as.character(taghead$taghead)
+tags<-strsplit(taghead$taghead, " ")
+
+
+```
