@@ -56,6 +56,13 @@ int$view_counter<-as.numeric(int$view_counter)
 int$mylist_coutner<-as.numeric(int$mylist_counter)
 int$tags<-as.character(int$tags)
 
+# これで各タグの頻度が算出できる
+t1<-strsplit(int$tags, " ")
+t1<-unlist(t1)
+t1<-data.frame(table(t1))
+t2<-subset(t1,Freq>=2)
+
+
 # 唯一存在するタグのみを抽出
 taghead<-int$tags
 taghead<-data.frame(taghead)
@@ -65,6 +72,9 @@ tags<-data.frame(unlist(tags))
 tags<-unique(tags)
 names(tags)<-c("tag")
 
-# このタグ毎の平均視聴数・コメント数・マイリスト数を算出
+# タグ毎の平均視聴数・コメント数・マイリスト数を算出
+
+
+# タグ同士の関係を表現する(白目)
 
 ```
