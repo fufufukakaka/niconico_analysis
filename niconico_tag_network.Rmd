@@ -8,6 +8,7 @@ output: html_document
 ゆっくり、で連関性のあるタグを収集し、タグのネットワークを作るのだ
 
 ```{r,cache=TRUE}
+devtools::github(dichika/niconico)
 require(niconico)
 
 # ゆっくりに関連したタグで検索をかける
@@ -55,11 +56,15 @@ int$view_counter<-as.numeric(int$view_counter)
 int$mylist_coutner<-as.numeric(int$mylist_counter)
 int$tags<-as.character(int$tags)
 
-# こっからわからんで
+# 唯一存在するタグのみを抽出
 taghead<-int$tags
 taghead<-data.frame(taghead)
 taghead$taghead<-as.character(taghead$taghead)
 tags<-strsplit(taghead$taghead, " ")
+tags<-data.frame(unlist(tags))
+tags<-unique(tags)
+names(tags)<-c("tag")
 
+# このタグ毎の平均視聴数・コメント数・マイリスト数を算出
 
 ```
