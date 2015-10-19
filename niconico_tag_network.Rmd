@@ -1,53 +1,48 @@
 ---
 title: "yukkyuri_tag_network"
 author: "Yusuke Fukasawa"
-date: "2015”N10Œ16“ú"
+date: "2015å¹´10æœˆ19æ—¥"
 output: html_document
 ---
 
-‚ä‚Á‚­‚èA‚Å˜AŠÖ«‚Ì‚ ‚éƒ^ƒO‚ğûW‚µAƒ^ƒO‚Ìƒlƒbƒgƒ[ƒN‚ğì‚é‚Ì‚¾
-
 ```{r,cache=TRUE}
-devtools::github(dichika/niconico)
 require(niconico)
 require(igraph)
-# ‚ä‚Á‚­‚è‚ÉŠÖ˜A‚µ‚½ƒ^ƒO‚ÅŒŸõ‚ğ‚©‚¯‚é
+# ã‚†ã£ãã‚Šã«é–¢é€£ã—ãŸã‚¿ã‚°ã§æ¤œç´¢ã‚’ã‹ã‘ã‚‹
 
-s1<-getSearch(query = "‚ä‚Á‚­‚èÀ‹µƒvƒŒƒC", size = 100, type = "tag")
-s2<-getSearch(query = "‚ä‚Á‚­‚èÀ‹µ", size = 100, type = "tag")
-s3<-getSearch(query = "‚ä‚Á‚­‚è", size = 100, type = "tag")
-s4<-getSearch(query = "‚ä‚Á‚­‚èÀ‹µƒvƒŒƒCpart1ƒŠƒ“ƒN", size = 100, type = "tag")
-s5<-getSearch(query = "‚ä‚Á‚­‚èTRPG", size = 100, type = "tag")
-s6<-getSearch(query = "‚ä‚Á‚­‚è‰ğà", size = 100, type = "tag")
-s7<-getSearch(query = "‚ä‚Á‚­‚èƒƒ{ƒbƒg•¨À‹µ", size = 100, type = "tag")
-s8<-getSearch(query = "‚ä‚Á‚­‚è‰ö’k", size = 100, type = "tag")
-s9<-getSearch(query = "‚ä‚Á‚­‚èƒ{ƒCƒX", size = 100, type = "tag")
-s10<-getSearch(query = "‚ä‚Á‚­‚èÀ‹µƒvƒŒƒCÅI‰ñƒŠƒ“ƒN", size = 100, type = "tag")
-s11<-getSearch(query = "‚ä‚Á‚­‚èŒ€ê", size = 100, type = "tag")
-s12<-getSearch(query = "‚ä‚Á‚­‚è‚µ‚Ä‚¢‚Á‚Ä‚ËIII", size = 100, type = "tag")
-s13<-getSearch(query = "‚ä‚Á‚­‚è˜N“Ç", size = 100, type = "tag")
-s14<-getSearch(query = "‚ä‚Á‚­‚è•]‰¿‚³‚ê‚é‚×‚«", size = 100, type = "tag")
-s15<-getSearch(query = "‘½l”‚ä‚Á‚­‚èÀ‹µƒvƒŒƒC", size = 100, type = "tag")
-s16<-getSearch(query = "‚ä‚Á‚­‚èÔÚ", size = 100, type = "tag")
-s17<-getSearch(query = "‚ä‚Á‚­‚èMinecraft", size = 100, type = "tag")
-s18<-getSearch(query = "‚ä‚Á‚­‚èƒXƒvƒ‰ƒgƒD[ƒ“", size = 100, type = "tag")
-s19<-getSearch(query = "‚ä‚Á‚­‚èƒVƒ‡[ƒg‰ö’kƒŠƒ“ƒN", size = 100, type = "tag")
-s20<-getSearch(query = "‚ä‚Á‚­‚è‰ğàPart1ƒŠƒ“ƒN", size = 100, type = "tag")
-s21<-getSearch(query = "ŠÍ–º‚ä‚Á‚­‚èÀ‹µƒvƒŒƒC", size = 100, type = "tag")
-s22<-getSearch(query = "‚ä‚Á‚­‚è—·s", size = 100, type = "tag")
-s23<-getSearch(query = "‚ä‚Á‚­‚èTRPG‘æˆê˜bƒŠƒ“ƒN", size = 100, type = "tag")
-s24<-getSearch(query = "‚ä‚Á‚­‚èÀ‹µƒvƒŒƒC’P”­ƒŠƒ“ƒN", size = 100, type = "tag")
-s25<-getSearch(query = "ƒzƒ‰[‚ä‚Á‚­‚èÀ‹µ", size = 100, type = "tag")
-s26<-getSearch(query = "–{‹C‚Å‰Ì‚¤‚ä‚Á‚­‚èƒVƒŠ[ƒY", size = 100, type = "tag")
-s27<-getSearch(query = "ƒzƒ‰[‚ä‚Á‚­‚èÀ‹µ", size = 100, type = "tag")
-s28<-getSearch(query = "‚ä‚Á‚­‚è¶Šˆ", size = 100, type = "tag")
+s1<-getSearch(query = "ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤", size = 100, type = "tag")
+s2<-getSearch(query = "ã‚†ã£ãã‚Šå®Ÿæ³", size = 100, type = "tag")
+s3<-getSearch(query = "ã‚†ã£ãã‚Š", size = 100, type = "tag")
+s4<-getSearch(query = "ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤part1ãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s5<-getSearch(query = "ã‚†ã£ãã‚ŠTRPG", size = 100, type = "tag")
+s6<-getSearch(query = "ã‚†ã£ãã‚Šè§£èª¬", size = 100, type = "tag")
+s7<-getSearch(query = "ã‚†ã£ãã‚Šãƒ­ãƒœãƒƒãƒˆç‰©å®Ÿæ³", size = 100, type = "tag")
+s8<-getSearch(query = "ã‚†ã£ãã‚Šæ€ªè«‡", size = 100, type = "tag")
+s9<-getSearch(query = "ã‚†ã£ãã‚Šãƒœã‚¤ã‚¹", size = 100, type = "tag")
+s10<-getSearch(query = "ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤æœ€çµ‚å›ãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s11<-getSearch(query = "ã‚†ã£ãã‚ŠåŠ‡å ´", size = 100, type = "tag")
+s12<-getSearch(query = "ã‚†ã£ãã‚Šã—ã¦ã„ã£ã¦ã­ï¼ï¼ï¼", size = 100, type = "tag")
+s13<-getSearch(query = "ã‚†ã£ãã‚Šæœ—èª­", size = 100, type = "tag")
+s14<-getSearch(query = "ã‚†ã£ãã‚Šè©•ä¾¡ã•ã‚Œã‚‹ã¹ã", size = 100, type = "tag")
+s15<-getSearch(query = "å¤šäººæ•°ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤", size = 100, type = "tag")
+s16<-getSearch(query = "ã‚†ã£ãã‚Šè»Šè¼‰", size = 100, type = "tag")
+s17<-getSearch(query = "ã‚†ã£ãã‚ŠMinecraft", size = 100, type = "tag")
+s18<-getSearch(query = "ã‚†ã£ãã‚Šã‚¹ãƒ—ãƒ©ãƒˆã‚¥ãƒ¼ãƒ³", size = 100, type = "tag")
+s19<-getSearch(query = "ã‚†ã£ãã‚Šã‚·ãƒ§ãƒ¼ãƒˆæ€ªè«‡ãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s20<-getSearch(query = "ã‚†ã£ãã‚Šè§£èª¬Part1ãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s21<-getSearch(query = "è‰¦å¨˜ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤", size = 100, type = "tag")
+s22<-getSearch(query = "ã‚†ã£ãã‚Šæ—…è¡Œ", size = 100, type = "tag")
+s23<-getSearch(query = "ã‚†ã£ãã‚ŠTRPGç¬¬ä¸€è©±ãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s24<-getSearch(query = "ã‚†ã£ãã‚Šå®Ÿæ³ãƒ—ãƒ¬ã‚¤å˜ç™ºãƒªãƒ³ã‚¯", size = 100, type = "tag")
+s25<-getSearch(query = "ãƒ›ãƒ©ãƒ¼ã‚†ã£ãã‚Šå®Ÿæ³", size = 100, type = "tag")
+s26<-getSearch(query = "æœ¬æ°—ã§æ­Œã†ã‚†ã£ãã‚Šã‚·ãƒªãƒ¼ã‚º", size = 100, type = "tag")
+s27<-getSearch(query = "ãƒ›ãƒ©ãƒ¼ã‚†ã£ãã‚Šå®Ÿæ³", size = 100, type = "tag")
+s28<-getSearch(query = "ã‚†ã£ãã‚Šç”Ÿæ´»", size = 100, type = "tag")
 int<-rbind(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28)
-```
-```{r}
-# ‚¢‚ç‚È‚¢‚à‚Ì‚Í‚·‚Ä‚é
+# ã„ã‚‰ãªã„ã‚‚ã®ã¯ã™ã¦ã‚‹
 int<-int[,c(-1,-4,-5,-10,-11)]
 
-# ‚±‚Ì‚Ü‚Ü‚¾‚ÆlistƒIƒuƒWƒFƒNƒg‚Å‚Ç‚¤‚É‚à‚È‚ç‚È‚¢‚Ì‚ÅA—ñ‚²‚Æ‚É“K‚µ‚½‚à‚Ì‚É•ÏŠ·‚·‚é
+# ã“ã®ã¾ã¾ã ã¨listã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã©ã†ã«ã‚‚ãªã‚‰ãªã„ã®ã§ã€åˆ—ã”ã¨ã«é©ã—ãŸã‚‚ã®ã«å¤‰æ›ã™ã‚‹
 int$start_time<-as.character(int$start_time)
 int$start_time<-as.POSIXlt(int$start_time)
 int$comment_counter<-as.numeric(int$comment_counter)
@@ -56,14 +51,14 @@ int$view_counter<-as.numeric(int$view_counter)
 int$mylist_coutner<-as.numeric(int$mylist_counter)
 int$tags<-as.character(int$tags)
 
-# ‚±‚ê‚ÅŠeƒ^ƒO‚Ì•p“x‚ªZo‚Å‚«‚é
+# ã“ã‚Œã§å„ã‚¿ã‚°ã®é »åº¦ãŒç®—å‡ºã§ãã‚‹
 t1<-strsplit(int$tags, " ")
 t1<-unlist(t1)
 t1<-data.frame(table(t1))
 t2<-subset(t1,Freq>=2)
 
 
-# —Bˆê‘¶İ‚·‚éƒ^ƒO‚Ì‚İ‚ğ’Šo
+# å”¯ä¸€å­˜åœ¨ã™ã‚‹ã‚¿ã‚°ã®ã¿ã‚’æŠ½å‡º
 taghead<-int$tags
 taghead<-data.frame(taghead)
 taghead$taghead<-as.character(taghead$taghead)
@@ -72,31 +67,27 @@ tags<-data.frame(unlist(tags))
 tags<-unique(tags)
 names(tags)<-c("tag")
 
-# ƒ^ƒO–ˆ‚Ì•½‹Ï‹’®”EƒRƒƒ“ƒg”Eƒ}ƒCƒŠƒXƒg”‚ğZo
+# ã‚¿ã‚°æ¯ã®å¹³å‡è¦–è´æ•°ãƒ»ã‚³ãƒ¡ãƒ³ãƒˆæ•°ãƒ»ãƒã‚¤ãƒªã‚¹ãƒˆæ•°ã‚’ç®—å‡º
 
 
-# ƒ^ƒO“¯m‚ÌŠÖŒW‚ğ•\Œ»‚·‚é(”’–Ú)
-
+# ã‚¿ã‚°åŒå£«ã®é–¢ä¿‚ã‚’è¡¨ç¾ã™ã‚‹(ç™½ç›®)
 ```
+ä¸Šè¨˜ã«æ›¸ã„ãŸã‚ˆã†ãªã“ã¨ãŒã—ãŸã„ã®ã ãŒã€ä¸Šæ‰‹ãã„ã‹ã¬ã€‚ ãã‚“ãªã¨ã“ã‚ã«ä¸€ç­‹ã®å…‰ãŒã€‚å¯¾è§’æˆåˆ†ãŒ0ã«ãªã‚‰ãªã„ã®ã¯ä¸å®‰ã ãŒã€ã“ã„ã¤ã§ä½•ã¨ã‹ã—ã¦ã¿ãŸã„ã€‚
 
-ã‹L‚É‘‚¢‚½‚æ‚¤‚È‚±‚Æ‚ª‚µ‚½‚¢‚Ì‚¾‚ªAãè‚­‚¢‚©‚ÊB
-‚»‚ñ‚È‚Æ‚±‚ë‚Éˆê‹Ø‚ÌŒõ‚ªB‘ÎŠp¬•ª‚ª0‚É‚È‚ç‚È‚¢‚Ì‚Í•sˆÀ‚¾‚ªA‚±‚¢‚Â‚Å‰½‚Æ‚©‚µ‚Ä‚İ‚½‚¢B
-
-ƒGƒNƒZƒ‹‚Åˆ—‚µ‚½‚à‚Ì‚ğ“Ç‚İ‚Ş‚Æ‚±‚ë‚©‚ç
-
-```{r}
+ã‚¨ã‚¯ã‚»ãƒ«ã§å‡¦ç†ã—ãŸã‚‚ã®ã‚’èª­ã¿è¾¼ã‚€ã¨ã“ã‚ã‹ã‚‰
+```{r,cache=TRUE}
 seed<-read.csv("seed.csv",fileEncoding="cp932")
 adjacency <- function(n){
-## o—Ís—ñ‚Ì‰Šú‰»
+## å‡ºåŠ›è¡Œåˆ—ã®åˆæœŸåŒ–
 mydata <- diag(0,length(colnames(n)))
-## sC—ñ‚É–¼‘O‚ğ•t‚¯‚é
+## è¡Œï¼Œåˆ—ã«åå‰ã‚’ä»˜ã‘ã‚‹
 colnames(mydata) <- colnames(n)
 rownames(mydata) <- colnames(n)
-## r‚Í—ñ”Ô†
+## rã¯åˆ—ç•ªå·
 for(r in 1:length(colnames(n))){
-## rs–Ú‚ÉCc•ûŒü‚É‡Œv‚µ‚½‚à‚Ì‚ğ‘ã“ü
+## rè¡Œç›®ã«ï¼Œç¸¦æ–¹å‘ã«åˆè¨ˆã—ãŸã‚‚ã®ã‚’ä»£å…¥
 mydata[r,] <- colSums(
-## r—ñ–Ú‚ª1‚É‚È‚Á‚Ä‚¢‚és‚ğ‘ÎÛ‚É‚µ‚Ä
+## råˆ—ç›®ãŒ1ã«ãªã£ã¦ã„ã‚‹è¡Œã‚’å¯¾è±¡ã«ã—ã¦
 n[n[,r] == 1,]
 )
 }
@@ -107,31 +98,60 @@ adj<-adjacency(seed)
 g <- graph.adjacency(adj,weighted=TRUE)
 write.graph(g,"taggraph.gml","gml")
 ```
+ã§ã€å‡ºæ¥ãŸã‚°ãƒ©ãƒ•ã‚’Gephiã§ã¡ã‚‡ã“ã¡ã‚‡ã“ã¨ã„ã˜ã‚Šã¾ã—ã¦ã€‚ æœ€åˆã®æ™‚ç‚¹ã§æ¬¡æ•°ãŒ9ä»¥ä¸‹ã®ãƒãƒ¼ãƒ‰ã‚’å‰Šé™¤ã—ã€å„ç¨®çµ±è¨ˆé‡ã‚’è¨ˆç®—ã—ã¦ã‹ã‚‰csvã§ãƒãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã‚’åãå‡ºã•ã›ã¾ã™ã€‚ åãå‡ºã—ãŸãƒãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã«å¹³å‡å†ç”Ÿå›æ•°ãƒ»ã‚³ãƒ¡ãƒ³ãƒˆæ•°ãƒ»ãƒã‚¤ãƒªã‚¹ãƒˆæ•°ãƒ»å‹•ç”»å†ç”Ÿæ™‚é–“ãƒ»ã‚¢ãƒƒãƒ—æ—¥æ™‚ã®æƒ…å ±ã‚’ä»˜ä¸ã€‚ ã“ã®ã¨ãç´„1%ã®ãƒãƒ¼ãƒ‰ã¯æ–‡å­—åŒ–ã‘ã—ã¦ã—ã¾ã£ã¦å¯¾å¿œãŒå–ã‚Œãªããªã£ã¦ã—ã¾ã£ãŸã®ã§ã€ãƒãƒ¼ãƒ‰æ•°11ä»¥ä¸Šã®ã‚‚ã®ã¯æ•°ã‚‚å°‘ãªã‹ã£ãŸã®ã§é ‘å¼µã£ã¦å¾©æ—§ã—ã¾ã—ãŸãŒã€10ä»¥ä¸‹ã®ã‚„ã¤ã¯å¤šã‹ã£ãŸã®ã§ã€ã‚¨ãƒ©ãƒ¼ã«ãªã‚‰ãªã„ãƒãƒ¼ãƒ‰(æ¬¡æ•°åŒã˜)ã®å¹³å‡å€¤ã‚’ã¨ã£ã¦ã€æ¨™æº–åå·®ã‚’ã„ã„æ„Ÿã˜ã®ã«ã—ã¦æ­£è¦åˆ†å¸ƒä¹±æ•°ã§å€¤ã‚’ç”Ÿæˆã—ã¦ä»£æ›¿ã—ã¾ã—ãŸã€‚ã†ã‚“ã€‚ã”ã‚ã‚“ãªã•ã„ã€‚
 
-‚ÅAo—ˆ‚½ƒOƒ‰ƒt‚ğGephi‚Å‚¿‚å‚±‚¿‚å‚±‚Æ‚¢‚¶‚è‚Ü‚µ‚ÄB
-Å‰‚Ì“_‚ÅŸ”‚ª9ˆÈ‰º‚Ìƒm[ƒh‚ğíœ‚µAŠeí“Œv—Ê‚ğŒvZ‚µ‚Ä‚©‚çcsv‚Åƒm[ƒhƒŠƒXƒg‚ğ“f‚«o‚³‚¹‚Ü‚·B
-“f‚«o‚µ‚½ƒm[ƒhƒŠƒXƒg‚É•½‹ÏÄ¶‰ñ”EƒRƒƒ“ƒg”Eƒ}ƒCƒŠƒXƒg”E“®‰æÄ¶ŠÔEƒAƒbƒv“ú‚Ìî•ñ‚ğ•t—^B
-‚±‚Ì‚Æ‚«–ñ1%‚Ìƒm[ƒh‚Í•¶š‰»‚¯‚µ‚Ä‚µ‚Ü‚Á‚Ä‘Î‰‚ªæ‚ê‚È‚­‚È‚Á‚Ä‚µ‚Ü‚Á‚½‚Ì‚ÅAƒm[ƒh”11ˆÈã‚Ì‚à‚Ì‚Í”‚à­‚È‚©‚Á‚½‚Ì‚ÅŠæ’£‚Á‚Ä•œ‹Œ‚µ‚Ü‚µ‚½‚ªA10ˆÈ‰º‚Ì‚â‚Â‚Í‘½‚©‚Á‚½‚Ì‚ÅAƒGƒ‰[‚É‚È‚ç‚È‚¢ƒm[ƒh(Ÿ”“¯‚¶)‚Ì•½‹Ï’l‚ğ‚Æ‚Á‚ÄA•W€•Î·‚ğ‚¢‚¢Š´‚¶‚Ì‚É‚µ‚Ä³‹K•ª•z—”‚Å’l‚ğ¶¬‚µ‚Ä‘ã‘Ö‚µ‚Ü‚µ‚½B‚¤‚ñB‚²‚ß‚ñ‚È‚³‚¢B
+ã§ã€ä»Šå›ã®ç›®çš„ã¯ã‚¿ã‚°ã‹ã‚‰è¦‹ã‚‹ã€ãƒ‹ã‚³ãƒ‹ã‚³ã‚†ã£ãã‚Šç•Œéšˆã«ãŠã„ã¦èŠ½ç”Ÿãˆã¤ã¤ã‚ã‚‹æ–‡åŒ–ã‚’æ¢ã‚‹ã€ã¨ã„ã†ã‚‚ã®ã§ã—ãŸã€‚ ã“ã“ã§ã¯å®šç€ã—ãŸæ–‡åŒ–ã¯ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã«å…¥ã£ã¦ãã‚„ã™ã„ã¨ã„ã†ä»®å®šã‚’ç½®ã„ã¦ã€ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒˆ(ç·åˆãƒã‚¤ãƒ³ãƒˆï¼å†ç”Ÿæ•°+(ã‚³ãƒ¡ãƒ³ãƒˆæ•°Ã—è£œæ­£å€¤)+ãƒã‚¤ãƒªã‚¹ãƒˆæ•°Ã—15)ã®ä¸Šä½5%ã‚’æ­£ã—ã„ä¾‹ã€ä¸‹ä½5%ã‚’è² ä¾‹ã‚’ã—ã¦ãƒˆãƒ¬ãƒ¼ãƒ‹ãƒ³ã‚°ã‚»ãƒƒãƒˆã‚’æ§‹ç¯‰ã™ã‚‹ã“ã¨ã«ã—ã¾ã™ã€‚
 
-‚ÅA¡‰ñ‚Ì–Ú“I‚Íƒ^ƒO‚©‚çŒ©‚éAƒjƒRƒjƒR‚ä‚Á‚­‚èŠEŒG‚É‚¨‚¢‚Ä‰è¶‚¦‚Â‚Â‚ ‚é•¶‰»‚ğ’T‚éA‚Æ‚¢‚¤‚à‚Ì‚Å‚µ‚½B
-‚±‚±‚Å‚Í’è’…‚µ‚½•¶‰»‚Íƒ‰ƒ“ƒLƒ“ƒO‚É“ü‚Á‚Ä‚«‚â‚·‚¢‚Æ‚¢‚¤‰¼’è‚ğ’u‚¢‚ÄAƒ‰ƒ“ƒLƒ“ƒOƒ|ƒCƒ“ƒg(‘‡ƒ|ƒCƒ“ƒgÄ¶”+(ƒRƒƒ“ƒg”~•â³’l)+ƒ}ƒCƒŠƒXƒg”~15)‚ÌãˆÊ5%‚ğ³‚µ‚¢—áA‰ºˆÊ5%‚ğ•‰—á‚ğ‚µ‚ÄƒgƒŒ[ƒjƒ“ƒOƒZƒbƒg‚ğ\’z‚·‚é‚±‚Æ‚É‚µ‚Ü‚·B
-
-•â³’l=(Ä¶”+ƒ}ƒCƒŠƒXƒg”)/(Ä¶”+ƒRƒƒ“ƒg”+ƒ}ƒCƒŠƒXƒg”)
-–{“–‚ÍLƒ|ƒCƒ“ƒg‚à‚ ‚é‚ñ‚¾‚¯‚Ç¡‰ñ‚Í–³‹B
-
+è£œæ­£å€¤=(å†ç”Ÿæ•°+ãƒã‚¤ãƒªã‚¹ãƒˆæ•°)/(å†ç”Ÿæ•°+ã‚³ãƒ¡ãƒ³ãƒˆæ•°+ãƒã‚¤ãƒªã‚¹ãƒˆæ•°) æœ¬å½“ã¯åºƒå‘Šãƒã‚¤ãƒ³ãƒˆã‚‚ã‚ã‚‹ã‚“ã ã‘ã©ä»Šå›ã¯ç„¡è¦–ã€‚
 ```{r}
 require(e1071)
 require(randomForest)
 require(ggplot2)
-
-# —\‚ßì¬‚µ‚½ƒm[ƒhƒŠƒXƒg‚ğ“Ç‚İ‚Ş
+require(knitr)
+# äºˆã‚ä½œæˆã—ãŸãƒãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã‚’èª­ã¿è¾¼ã‚€
 set<-read.csv("taggraph_nodes.csv",fileEncoding = "CP932")
 set<-na.omit(set)
-#Ä¶”‚È‚Ç‚Ìî•ñ‚ÍŠù‚Éƒ|ƒCƒ“ƒg‚Å”½‰f‚µ‚Ä‚¢‚é‚Æl‚¦íœ‚µ‚Ä‚¨‚­BŒvZŒ‹‰Ê‚ğÅI“I‚Éset‚É“\‚Á‚Äo—Í‚µGephi‚Å‚Ü‚½g‚¤
+#å†ç”Ÿæ•°ãªã©ã®æƒ…å ±ã¯æ—¢ã«ãƒã‚¤ãƒ³ãƒˆã§åæ˜ ã—ã¦ã„ã‚‹ã¨è€ƒãˆå‰Šé™¤ã—ã¦ãŠãã€‚è¨ˆç®—çµæœã‚’æœ€çµ‚çš„ã«setã«è²¼ã£ã¦å‡ºåŠ›ã—Gephiã§ã¾ãŸä½¿ã†
 set1<-set[,c(-2,-3,-10,-17,-18,-19)]
 plus<-subset(set1,set1$Points>2.5*mean(set1$Points))
 minus<-subset(set1,set1$Points<0.05*mean(set1$Points))
 plus$culture<-as.factor(1)
 minus$culture<-as.factor(0)
-trainingset<-data.frame(rbind(plus,minus))
+
+# ãƒãƒ¥ãƒ¼ãƒ‹ãƒ³ã‚°ç”¨ã¨ãƒ†ã‚¹ãƒˆç”¨ã«åˆ†ã‘ã‚‹
+plus1<-plus[c(1:47),]
+plus2<-plus[c(48:94),]
+minus1<-minus[c(1:46),]
+minus2<-minus[c(47:92),]
+learning<-data.frame(rbind(plus1,minus1))
+test<-data.frame(rbind(plus2,minus2))
+# æ—¥ä»˜å‹ã¯ä½¿ãˆãªã„ã®ã§numericã«ã€‚ã‚ã¨ã€Hubã¯å‰Šé™¤ã€‚
+learning1<-learning[,c(-1,-5,-16)]
+learning1$ave_starttime<-as.numeric(learning1$ave_starttime)
+learning1$Authority<-as.numeric(learning1$Authority)
+test1<-test[,c(-1,-5,-16)]
+test1$ave_starttime<-as.numeric(test1$ave_starttime)
+test1$Authority<-as.numeric(test1$Authority)
+```
+```{r}
+# æœ€é©ãªã¨ã“ã‚ã§é‡è¦åº¦ã‚’è¨ˆç®—ã—ãŸã„
+tuneRF(learning1[,-14],learning1[,14],doBest=T)
+# mtry=2ãŒæœ€é©ãªæ¨¡æ§˜
+# æ–‡å­—åŒ–ã‘ã«æ°—ã‚’ã¤ã‘ã¦ã€‚ã€‚ã€‚UTF-8ã«ã—ã¦æ—¥æœ¬èªã‚’æ‰“ã¡è¾¼ã‚€ã¨è‰¯ã„æ¨¡æ§˜
+importance<-randomForest(culture~.,learning1,mtry=6,importance = TRUE)
+knitr::kable(importance(importance))
+
+# ã©ã®å¤‰æ•°ãŒé‡è¦ãªã®ã‹ã¯ã‚ã‹ã£ãŸã®ã§ã€ã“ã‚Œã‹ã‚‰SVMã«ã‚ˆã‚‹å­¦ç¿’ã¨ãƒãƒ¥ãƒ¼ãƒ‹ãƒ³ã‚°ã‚’è¡Œã„ã¾ã™
+presvm<-svm(culture~.,learning1,cross=8)
+summary(presvm)
+# ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯90%å‰å¾Œã¨ã„ã£ãŸã¨ã“ã‚ã‹
+# ã“ã“ã‹ã‚‰ã¯ãƒãƒ¥ãƒ¼ãƒ‹ãƒ³ã‚°
+gammaRange = 10^(-5:5)
+costRange = 10^(-2:2)
+t <- tune.svm(culture ~ ., data = learning1, gamma=gammaRange, cost=costRange,
+              tunecontrol = tune.control(sampling="cross", cross=8))
+cat("- best parameters:\n")
+cat("gamma =", t$best.parameters$gamma, "; cost =", t$best.parameters$cost, ";\n")
+cat("accuracy:", 100 - t$best.performance * 100, "%\n\n")
+plot(t, transform.x=log10, transform.y=log10)
 ```
