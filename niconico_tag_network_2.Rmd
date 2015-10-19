@@ -112,9 +112,10 @@ nottraining$training<-0
 plus$training<-1
 minus$training<-1
 nottraining<-nottraining[,c(1,17)]
-plusset<-plus[,c(1,17)]
-minusset<-minus[,c(1,17)]
-head(nottraining)
-head(plusset)
-head(minusset)
+plusset<-plus[,c(1,18)]
+minusset<-minus[,c(1,18)]
+set3<-rbind(nottraining,plusset,minusset)
+set4<-merge(set,set3,by="Id",all=T)
+knitr::kable(head(set4))
+write.csv(set4,"gephinodesver2.csv")
 ```

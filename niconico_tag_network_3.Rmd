@@ -1,0 +1,40 @@
+---
+title: "niconico_tag_network_3"
+author: "Yusuke Fukasawa"
+date: "2015年10月19日"
+output: html_document
+---
+
+Gephiで分析する前に幾つかグラフを書いてみようぞ
+グラフというか散布図ね
+
+```{r}
+require(ggplot2)
+nodes<-read.csv("gephinodesver2.csv")
+p1 <- ggplot(nodes, aes(x=probability, y=次数))
+p1 + geom_point(aes(colour=probability))
+p2 <- ggplot(nodes, aes(x=probability, y=Authority))
+p2 + geom_point(aes(colour=probability))
+p3 <- ggplot(nodes, aes(x=probability, y=Modularity.Class))
+p3 + geom_point(aes(colour=Points))
+p4 <- ggplot(nodes, aes(x=probability, y=PageRank))
+p4 + geom_point(aes(colour=probability))
+p5 <- ggplot(nodes, aes(x=probability, y=Clustering.Coefficient))
+p5 + geom_point(aes(colour=probability))
+p6 <- ggplot(nodes, aes(x=probability, y=Number.of.triangles))
+p6 + geom_point(aes(colour=probability))
+p7 <- ggplot(nodes, aes(x=probability, y=Eigenvector.Centrality))
+p7 + geom_point(aes(colour=probability))
+p8 <- ggplot(nodes, aes(x=probability, y=ave_view))
+p8 + geom_point(aes(colour=probability))
+p9 <- ggplot(nodes, aes(x=probability, y=ave_comment))
+p9 + geom_point(aes(colour=probability))
+p10 <- ggplot(nodes, aes(x=probability, y=ave_mylist))
+p10 + geom_point(aes(colour=probability))
+p11 <- ggplot(nodes, aes(x=probability, y=Points))
+p11 + geom_point(aes(colour=probability)) + geom_smooth(method="lm")
+p12 <- ggplot(nodes, aes(x=probability, y=ave_length))
+p12 + geom_point(aes(colour=probability)) + geom_smooth(method="lm")
+p13 <- ggplot(nodes, aes(x=probability, y=ave_starttime))
+p13 + geom_point(aes(colour=probability))
+```
