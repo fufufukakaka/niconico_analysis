@@ -10,6 +10,7 @@ output: html_document
 で、今回の目的はタグから見る、ニコニコゆっくり界隈において芽生えつつある文化を探る、というものでした。 ここでは定着した文化はランキングに入ってきやすいという仮定を置いて、ランキングポイント(総合ポイント＝再生数+(コメント数×補正値)+マイリスト数×15)の上位5%を正しい例、下位5%を負例をしてトレーニングセットを構築することにします。
 
 補正値=(再生数+マイリスト数)/(再生数+コメント数+マイリスト数) 本当は広告ポイントもあるんだけど今回は無視。
+
 ```{r}
 require(e1071)
 require(randomForest)
@@ -23,13 +24,7 @@ set1<-set[,c(-2,-3,-10,-17,-18,-19)]
 plus<-subset(set1,set1$Points>2.5*mean(set1$Points))
 minus<-subset(set1,set1$Points<0.05*mean(set1$Points))
 plus$culture<-as.factor(1)
-#再生数などの情報は既にポイントで反映していると考え削除しておく。計算結果を最終的にsetに貼って出力しGephiでまた使う
-set1<-set[,c(-2,-3,-10,-17,-18,-19)]
-plus<-subset(set1,set1$Points>2.5*mean(set1$Points))
-minus<-subset(set1,set1$Points<0.05*mean(set1$Points))
-plus$culture<-as.factor(1)
 minus$culture<-as.factor(0)
-
 # チューニング用とテスト用に分ける
 plus1<-plus[c(1:47),]
 plus2<-plus[c(48:94),]
@@ -38,7 +33,7 @@ minus2<-minus[c(47:92),]
 learning<-data.frame(rbind(plus1,minus1))
 test<-data.frame(rbind(plus2,minus2))
 # learningは等しい数にしたい
-learning<-data.frame(rbind(learning,test[c(93),]))
+learning<-data.frame(rbind(learning,test[93,]))
 test<-test[-93,]
 # 日付型は使えないのでnumericに。あと、Hubは削除。
 set1$ave_starttime<-as.numeric(set1$ave_starttime)
@@ -98,7 +93,28 @@ table(pred, test1[,14])
 あまり精度は良くない模様。。。
 確率が高いものだけに注目しよう
 ```{r}
+require(DT)
 realset<-set1[,c(-1,-5,-16)]
 pred<-predict(model,realset,probability = TRUE)
-knitr::kable(head(attr(pred, "probabilities")))
+knitr::kable(head(attr(pred,"probabilities")))
+probab<-attr(pred,"probabilities")
+probab<-data.frame(probab)
+probab<-probab[,-2]
+set$probability<-probab
+knitr::kable(head(set))
+```
+
+トレーニングセットに使ったものはフラグ立ててcsvで吐き出す
+
+```{r}
+nottraining<-subset(set1,set1$Points<2.5*mean(set1$Points) & set1$Points>0.05*mean(set1$Points))
+nottraining$training<-0
+plus$training<-1
+minus$training<-1
+nottraining<-nottraining[,c(1,17)]
+plusset<-plus[,c(1,17)]
+minusset<-minus[,c(1,17)]
+head(nottraining)
+head(plusset)
+head(minusset)
 ```
