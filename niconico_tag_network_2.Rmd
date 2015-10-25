@@ -53,6 +53,35 @@ tuneRF(learning1[,-14],learning1[,14],doBest=T)
 importance<-randomForest(culture~.,learning1,mtry=12,importance = TRUE)
 knitr::kable(importance(importance))
 
+#ggplot2で頑張って描く
+imp<-importance(importance)
+imp<-data.frame(imp)
+View(imp)
+imp<-imp[,c(-1,-2,-3)]
+imp<-data.frame(imp)
+imp1<-importance(importance)
+imp1<-data.frame(imp1)
+names(imp)<-"MeanDecreaseGini"
+imp$variable<-row.names(imp1)
+imp[1,2]<-"Degree"
+g <- ggplot(
+imp,                    # ggplot 用データフレーム
+aes (                  # ggplot オプション設定
+x = variable,           # x 軸を df$group とする
+y = MeanDecreaseGini,          # y 軸を df$length とする
+fill = variable        # df$group に従ってグループ分ける
+)
+)
+g <- g + geom_bar(                    # plotbarに当たる関数
+width = 0.8,                        # 棒の幅
+stat = "identity"
+)
+g <- g + xlab("Varibale")            # x 軸名
+g <- g + ylab("Importance")       # y 軸名
+g<-g + coord_flip()
+plot(g)
+
+
 # どの変数が重要なのかはわかったので、これからSVMによる学習とチューニングを行います
 presvm<-svm(culture~.,learning1,cross=8)
 summary(presvm)
